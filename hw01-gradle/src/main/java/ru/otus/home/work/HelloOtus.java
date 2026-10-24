@@ -13,5 +13,7 @@ public class HelloOtus {
 
         System.out.println("Количество ноутбуков на Складе 1: " + matrix.get("Склад 1", "Ноутбуки"));
         System.out.println("Все остатки Склада 1: " + matrix.row("Склад 1"));
+
+
     }
 }
