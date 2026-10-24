@@ -1,5 +1,8 @@
 package utils;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class ArrayUtils {
 
     /**
@@ -26,7 +29,7 @@ public class ArrayUtils {
             );
         }
         T temp=array[j];
-        array[k]=array[j];
+        array[j]=array[k];
         array[k]=temp;
     }
 
@@ -40,6 +43,21 @@ public class ArrayUtils {
         swap(array,j,k);
     }
 
+
+    /**
+     * Преобразует массив ссылочного типа в список.
+     * Возвращаемый список фиксирован по размеру и поддерживается исходным массивом
+     *
+     * @param arr массив для преобразования
+     * @param <T> тип элементов массива
+     * @return список, содержащий элементы массива
+     */
+    public static <T> List<T> toList(T[] arr) {
+        if (arr == null) {
+            return List.of();
+        }
+        return Arrays.asList(arr);
+    }
 
 
 

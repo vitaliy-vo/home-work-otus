@@ -5,7 +5,6 @@ allprojects {
     group = "ru.otus"
 
     repositories {
-        mavenLocal()
         mavenCentral()
     }
 
@@ -14,4 +13,6 @@ allprojects {
             languageVersion.set(JavaLanguageVersion.of(25))
         }
     }
+
+
 }

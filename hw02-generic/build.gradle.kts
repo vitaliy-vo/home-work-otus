@@ -1,13 +1,23 @@
 plugins {
-    application
+    java
     alias(libs.plugins.shadow)
 }
 
 dependencies {
-    compileOnly(libs.lombok)
+    implementation(libs.guava)
+    implementation(libs.lombok)
     annotationProcessor(libs.lombok)
+    testImplementation(libs.junit.jupiter)
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
-application {
-    mainClass = "ru.otus.home.work.Main"
+tasks.withType<JavaCompile>().configureEach {
+    options.annotationProcessorPath = configurations.getByName("annotationProcessor")
 }
+
+tasks.named("test") {
+    this as org.gradle.api.tasks.testing.Test
+    useJUnitPlatform()
+}
+
+
