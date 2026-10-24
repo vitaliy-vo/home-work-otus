@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class ArrayUtils {
 
     /**
      * Преобразует массив ссылочного типа в список.
-     * Возвращаемый список фиксирован по размеру и поддерживается исходным массивом
+     * Возвращаемый список является изменяемым ArrayList.
      *
      * @param arr массив для преобразования
      * @param <T> тип элементов массива
@@ -54,9 +55,9 @@ public class ArrayUtils {
      */
     public static <T> List<T> toList(T[] arr) {
         if (arr == null) {
-            return List.of();
+            return new ArrayList<>();
         }
-        return Arrays.asList(arr);
+        return new ArrayList<>(Arrays.asList(arr));
     }
 
 

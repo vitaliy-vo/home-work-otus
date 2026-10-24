@@ -104,17 +104,20 @@ class ArrayUtilsTest {
     }
 
     @Test
-    void toList_shouldReturnFixedSizeList() {
+    void toList_shouldReturnMutableList() {
         String[] arr = {"x", "y"};
         List<String> list = ArrayUtils.toList(arr);
-        assertThrows(UnsupportedOperationException.class, () -> list.add("z"));
+        list.add("z");
+        assertEquals(3, list.size());
+        assertEquals("z", list.get(2));
     }
 
     @Test
-    void toList_shouldReturnListBackedByArray() {
+    void toList_shouldReturnIndependentList() {
         String[] arr = {"a", "b"};
         List<String> list = ArrayUtils.toList(arr);
         list.set(0, "modified");
-        assertEquals("modified", arr[0]);
+        assertEquals("modified", list.get(0));
+        assertEquals("a", arr[0]);
     }
 }
