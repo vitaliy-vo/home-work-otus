@@ -1,33 +1,45 @@
 package utils;
 
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class WordCounter {
 
-    /*-Создать массив с набором слов (10-20 слов, должны встречаться повторяющиеся).
-            -Найти и вывести список уникальных слов, из которых состоит массив (дубликаты не считаем).
-    Посчитать, сколько раз встречается каждое слово.*/
-
-    public static void main(String[] args) {
-        // 1. Создаём массив слов (10–20 элементов, есть дубликаты)
-        String[] words = {
-                "яблоко", "банан", "яблоко", "груша", "банан", "апельсин",
-                "груша", "яблоко", "манго", "банан", "вишня",
-                "яблоко", "слива", "груша", "абрикос", "яблоко",
-                "персик", "банан", "ананас"
-        };
-
-       HashMap<String,Integer> wordCount =new HashMap<>();
-       for (String s :words){
-           wordCount.put(s,wordCount.getOrDefault(s,0)+1);
-       }
-        Set<String> keys = wordCount.keySet();
-        System.out.println("Список уникальный слов");
-        System.out.println(keys);
-
-        wordCount.forEach((k, v) ->
-                System.out.printf("Слово: %-20s | количество: %d%n", k, v)
-        );
+    /**
+     * Считает количество вхождений каждого слова в массиве.
+     */
+    public static Map<String, Integer> countWords(String[] words) {
+        Map<String, Integer> wordCount = new HashMap<>();
+        for (String word : words) {
+            wordCount.put(word, wordCount.getOrDefault(word, 0) + 1);
+        }
+        return wordCount;
     }
+
+    /**
+     * Возвращает список уникальных слов из массива.
+     */
+    public static List<String> getUniqueWords(String[] words) {
+        return Arrays.stream(words)
+                .distinct()
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Выводит результат подсчёта слов в консоль.
+     */
+    public static void printResults(Map<String, Integer> wordCount) {
+        System.out.println("=== Уникальные слова ===");
+        getUniqueWords(wordCount.keySet().toArray(new String[0])).forEach(System.out::println);
+
+        System.out.println("\n=== Частота слов ===");
+        wordCount.entrySet().stream()
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                .forEach(entry ->
+                        System.out.printf("Слово: %-20s | количество: %d%n", entry.getKey(), entry.getValue())
+                );
+    }
+
+
 }
