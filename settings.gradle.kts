@@ -8,3 +8,4 @@ pluginManagement {
         mavenCentral()
     }
 }
+include("hw-03-MiniJUnit")
