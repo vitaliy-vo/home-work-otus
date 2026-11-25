@@ -10,3 +10,4 @@ pluginManagement {
 }
 include("hw-03-MiniJUnit")
 include("hw12-AtmOOP")
+include("hw10-AOP")
