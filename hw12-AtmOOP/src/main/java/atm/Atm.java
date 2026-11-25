@@ -5,7 +5,7 @@ import atm.model.Banknote;
 import atm.model.Cassette;
 import atm.strategy.DispensingAlgorithm;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Atm {
@@ -13,7 +13,7 @@ public class Atm {
     private final DispensingAlgorithm dispensingAlgorithm;
 
     public Atm(DispensingAlgorithm dispensingAlgorithm) {
-        this.cassettes = new HashMap<>();
+        this.cassettes = new LinkedHashMap<>();
         this.dispensingAlgorithm = dispensingAlgorithm;
     }
 
@@ -27,7 +27,7 @@ public class Atm {
     public void acceptBanknotes(Banknote banknote, int count) {
         Cassette cassette = cassettes.get(banknote);
         if (cassette == null) {
-            throw new InvalidDenominationException(banknote.getDenomination());
+            throw new IllegalStateException("Нет ячейки для банкноты: " + banknote);
         }
         cassette.put(count);
     }
